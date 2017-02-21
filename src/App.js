@@ -31,15 +31,19 @@ class App extends Component {
     this.setState({ showModal: state})
   }
 
+  handleNewClock (name) {
+    console.log(name);
+  }
+
 
   render() {
     return (
       <div className="App">
         <Header />
-        {this.state.clocks}
         <Clock />
-        <AddClock onClick={this.openModal}/>
-        <NewClockModal showModal={this.state.showModal} updateShowState={this.updateShowState}/>
+        {this.state.clocks}
+        <AddClock onClick={this.openModal} />
+        <NewClockModal showModal={this.state.showModal} updateShowState={this.updateShowState} onSubmit={this.handleNewClock}/>
       </div>
     );
   }

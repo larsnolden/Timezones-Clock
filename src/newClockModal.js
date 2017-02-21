@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { Modal, Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 export default class NewClockModal extends Component {
@@ -18,10 +19,25 @@ export default class NewClockModal extends Component {
   handleClose() {
     if(this.state.showModal) {
       this.setState({
-        showModal: false
+        showModal: false,
+        location: null
       });
     }
     this.props.updateShowState(false);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    //send data to App.js
+    this.props.onSubmit(this.state.location);
+    this.handleClose();
+  }
+
+  handleChange(event) {
+    //when new location selected, save in state
+    this.setState({
+      location: event.target.value
+    })
   }
 
   render() {
@@ -34,7 +50,7 @@ export default class NewClockModal extends Component {
 
       <Modal.Body>
         <ControlLabel>Select Country or City</ControlLabel>
-        <FormControl componentClass="select" placeholder="select">
+        <FormControl componentClass="select" placeholder="select" onChange={this.handleChange.bind(this)}>
           <option>eine Banane</option>
           <option>eine Banane</option>
           <option>eine Banane</option>
@@ -43,7 +59,7 @@ export default class NewClockModal extends Component {
 
       <Modal.Footer>
         <Button onClick={this.handleClose.bind(this)}>Cancel</Button>
-        <Button bsStyle="primary">Add</Button>
+        <Button onClick={this.handleSubmit.bind(this)} bsStyle="primary">Add</Button>
       </Modal.Footer>
 
     </Modal>
