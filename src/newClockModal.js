@@ -2,6 +2,30 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
+import timezones from './timezones.json'
+
+//get selectable location from timezones.json
+ const locations = () => {
+   let locs = [];
+
+   timezones.forEach((zone) => {
+      if(zone.utc){
+        zone.utc.forEach((city) => {
+          locs.push(<option key={city}>{city}</option>)
+        })
+      }
+    })
+
+    return locs;
+ }
+ 
+
+
+  const test = () => {
+    return <h1>You see the test?</h1>
+  }
+
+
 export default class NewClockModal extends Component {
   constructor(props) {
     super(props);
@@ -51,9 +75,7 @@ export default class NewClockModal extends Component {
       <Modal.Body>
         <ControlLabel>Select Country or City</ControlLabel>
         <FormControl componentClass="select" placeholder="select" onChange={this.handleChange.bind(this)}>
-          <option>eine Banane</option>
-          <option>eine Banane</option>
-          <option>eine Banane</option>
+          {locations()}
         </ FormControl>
       </Modal.Body>
 
