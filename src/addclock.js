@@ -1,7 +1,6 @@
 import React,  { Component } from 'react';
 import {Button, Glyphicon, Col, Clearfix} from 'react-bootstrap';
 
-
 export default class AddClock extends Component {
   constructor(props) {
     super(props);
