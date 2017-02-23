@@ -2,3 +2,10 @@
   text-align: center;
 }
 
+.close-icon {
+  position: absolute !important;
+  right: 24px;
+  top: 10px !important;
+  font-size: 1.3em;
+  color: #BEB7C4;
+}

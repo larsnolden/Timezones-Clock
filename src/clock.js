@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, PanelGroup, Accordion, Grid, Row, Col, Clearfix } from 'react-bootstrap';
+import { Panel, PanelGroup, Accordion, Grid, Row, Col, Clearfix, Glyphicon } from 'react-bootstrap';
 
 /*function getUTC(offset) {
   return (this.state.date.getUTCHours() + offset) + ':' + this.state.date.getUTCMinutes()
@@ -11,7 +11,7 @@ export default class Clock extends Component {
 
     this.state = {
       date: new Date(),
-      time: 1
+      time: "..."
     }
 
     this.tick = this.tick.bind(this);
@@ -32,7 +32,6 @@ export default class Clock extends Component {
   }
 
   tick() {
-    console.log(this.props)
     this.setState ({
       date: new Date(),
       time: this.getUTC(this.props.offset)
@@ -45,6 +44,7 @@ export default class Clock extends Component {
         <Panel>
           <h1>{this.props.name}</h1>
           <h2>{this.state.time}</h2>
+          <Glyphicon className="close-icon" glyph="remove" onClick={this.props.close}/>
         </Panel>
       </Col>
     )

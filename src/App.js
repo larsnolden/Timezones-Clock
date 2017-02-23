@@ -30,9 +30,10 @@ class App extends Component {
       showModal: false
     }
 
-    this.openModal = this.openModal.bind(this)
-    this.updateShowState = this.updateShowState.bind(this)
-    this.handleNewClock = this.handleNewClock.bind(this)
+    this.openModal = this.openModal.bind(this);
+    this.updateShowState = this.updateShowState.bind(this);
+    this.handleNewClock = this.handleNewClock.bind(this);
+    this.removeClock = this.removeClock.bind(this);
   }
 
   openModal() {
@@ -46,9 +47,23 @@ class App extends Component {
   }
 
   handleNewClock (name) {
-    let newClock = this.state.clocks;
-    newClock.push(<Clock name={name} offset={getTimeOffset(name)} />)
-    this.setState({ clocks: newClock })
+    let newClocks = this.state.clocks;
+    newClocks.push(<Clock key={name} name={name} offset={getTimeOffset(name)} close={() => {this.removeClock(name)}} />)
+    this.setState({ clocks: newClocks })
+  }
+
+  removeClock(name) {
+    this.state.clocks.forEach((clock) => {
+      if(clock.props.name == name) {
+        let index = this.state.clocks.indexOf(clock);
+
+        //remove clock from clocks array
+        this.state.clocks.splice(index, 1)
+
+        //update state to refresh view
+        this.setState({})
+      }
+    });
   }
 
 
